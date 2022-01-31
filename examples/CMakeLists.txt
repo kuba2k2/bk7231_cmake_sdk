@@ -19,3 +19,6 @@ target_include_directories(wifi_softap.elf PUBLIC wifi_softap/)
 
 beken378_executable(peri_flash 1.0.0 bk7231t peri_flash/test_flash.c)
 target_include_directories(peri_flash.elf PUBLIC peri_flash/)
+
+beken378_executable(net_mqtt 1.0.0 bk7231t net_mqtt/mqtt_test.c wifi_station/wifi_station.c)
+target_include_directories(net_mqtt.elf PUBLIC net_mqtt/)
