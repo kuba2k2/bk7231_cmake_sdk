@@ -36,7 +36,7 @@ typedef enum _wifi_dis_reason
     DEAUTHENTICATION,
     DISASSOCIATION,
     AP_MISSING,
-    DISCONNECT,
+    WLAN_DISCONNECT,
 } WIFI_DISCONN_REASON;
 
 typedef struct _wifi_link_info
@@ -422,6 +422,7 @@ extern uint32_t bk_wlan_ap_get_frequency(void);
 extern uint32_t bk_wlan_get_INT_status(void);
 extern void bk_wlan_terminate_sta_rescan(void);
 extern int is_apm_bss_config_empty(void);
+extern void bk_wlan_status_register_cb(FUNC_1PARAM_PTR cb);
 
 /** @brief  Request deep sleep,and wakeup by gpio.
  *

@@ -165,4 +165,6 @@
 
 #define CFG_ENABLE_ATE_FEATURE                     0
 #define CFG_RWNX_QOS_MSDU						   1
+
+//#define PAHOMQTT_PIPE_MODE                         1
 #endif // _SYS_CONFIG_H_
