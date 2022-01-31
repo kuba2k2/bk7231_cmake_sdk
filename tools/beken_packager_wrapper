@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import json
+import argparse
+
+out_json = {
+    "magic": "RT-Thread",
+    "version": "0.1",
+    "count": 2,
+    "section": [
+        {
+            "firmware": "",
+            "version": "1M",
+            "partition": "bootloader",
+            "start_addr": "0x00000000",
+            "size": "65280"
+        },
+        {
+            "firmware": "",
+            "version": "1M",
+            "partition": "app",
+            "start_addr": "0x00011000",
+            "size": "956K"
+        }
+    ]
+}
+
+# parse commandline arguments
+def parse_args():
+    description = '''Beken HID Downloader.'''
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('-b', '--boot',
+                        help='specify boot file')
+    parser.add_argument('-f', '--firmware',
+                        help='specify firmware file')
+    args = parser.parse_args()
+    return args
+
+args = parse_args()
+bootloader_str = args.boot
+firmware_str = args.firmware
+
+out_path = "tmp.json"
+
+out_json["section"][0]["firmware"] = bootloader_str
+out_json["section"][1]["firmware"] = firmware_str
+out_json = json.dumps(out_json, sort_keys=True, indent=4)
+
+with open(str(out_path), "w") as f:
+    f.write(out_json)
+
+packager = os.path.dirname(os.path.abspath(__file__))
+packager = os.path.join(packager, "beken_packager")
+os.system("{} {}".format(packager, out_path))
+os.remove(out_path)
