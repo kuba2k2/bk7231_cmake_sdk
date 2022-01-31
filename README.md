@@ -1,22 +1,26 @@
 # BK7231 CMake SDK
+
 A quick project aiming to provide a (finally) usable SDK for Beken chips, commonly found in Tuya IoT modules.
 
 ## Supported platforms
+
 (i guess)
-:
+
 ### BK7231T
-Found in Tuya-branded modules, such as 
+
+Found in Tuya-branded modules, such as
 [WB1S](https://developer.tuya.com/en/docs/iot/wb1s?id=K9duevbj3ol4x),
 [WB2S](https://developer.tuya.com/en/docs/iot/wb2s-module-datasheet?id=K9ghecl7kc479),
 [WB2L](https://developer.tuya.com/en/docs/iot/wb2l-datasheet?id=K9duegc9bualu),
 [WB3S](https://developer.tuya.com/en/docs/iot/wb3s-module-datasheet?id=K9dx20n6hz5n4),
 [WB3L](https://developer.tuya.com/en/docs/iot/wb3l-module-datasheet?id=K9duiggw2v8sp) and probably some more.
 
-Tested to run on WB2L. The chip itself is marked as `BK7231TQN32`, the SDK mentions `BK7231U` and the bootloader
-says it's `BK7231S`. Yes.
+Tested to run on WB2L. The chip itself is marked as `BK7231TQN32`, the SDK mentions `BK7231U` and the bootloader says
+it's `BK7231S`. Yes.
 
-This platform is based on [tuya-iotos-embeded-sdk-wifi-ble-bk7231t](https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231t).
-The bare-bones SDK is used, without Tuya's SDKs and APIs.
+This platform is based
+on [tuya-iotos-embeded-sdk-wifi-ble-bk7231t](https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231t). The
+bare-bones SDK is used, without Tuya's SDKs and APIs.
 
 The firmware is encrypted using keys present in the source repo.
 
@@ -30,9 +34,11 @@ The firmware is encrypted using keys present in the source repo.
 ## Usage
 
 `add_subdirectory()` in your project's CMakeLists. Then call
+
 ```cmake
 beken378_executable(app_name 1.0.0 <platform> <sources>)
 ```
+
 with `<platform>` replaced with one of the supported SoCs, and <sources> with your C sources.
 
 To add include directories, libraries, etc., just call standard CMake functions with your app's name as target.
@@ -40,6 +46,7 @@ To add include directories, libraries, etc., just call standard CMake functions 
 ## Outputs
 
 After a successful compilation, your CMake build directory will contain the following files:
+
 - app_name_1.0.0.asm - disassembly of the ELF
 - app_name_1.0.0.bin - raw binary firmware file
 - app_name_1.0.0.elf - compiled sources
