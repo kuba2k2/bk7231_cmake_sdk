@@ -12,7 +12,8 @@ set(OTA_PACK_TY ${CMAKE_CURRENT_SOURCE_DIR}/tools/package CACHE INTERNAL "")
 
 add_subdirectory(platform/bk7231t bk7231t_sdk)
 
-function(beken378_executable TARGET VERSION PLATFORM SRCS)
+function(beken378_executable TARGET VERSION PLATFORM)
+    set(SRCS ${ARGN})
     set(FW "${TARGET}_${VERSION}")
     set(ELF "${TARGET}.elf")
     set(MAP "${FW}.map")
