@@ -10,11 +10,11 @@ set(BK_PACKAGER python ${CMAKE_CURRENT_SOURCE_DIR}/tools/beken_packager_wrapper 
 set(OTA_PACK_RT ${CMAKE_CURRENT_SOURCE_DIR}/tools/rt_ota_packaging_tool_cli CACHE INTERNAL "")
 set(OTA_PACK_TY ${CMAKE_CURRENT_SOURCE_DIR}/tools/package CACHE INTERNAL "")
 
-function(beken378_executable TARGET VERSION PLATFORM SRCS)
-    add_subdirectory("${PLATFORMS}/${PLATFORM}" ${PLATFORM}_sdk)
+add_subdirectory(platform/bk7231t bk7231t_sdk)
 
+function(beken378_executable TARGET VERSION PLATFORM SRCS)
     set(FW "${TARGET}_${VERSION}")
-    set(ELF "${FW}.elf")
+    set(ELF "${TARGET}.elf")
     set(MAP "${FW}.map")
     set(ASM "${FW}.asm")
     set(BIN "${FW}.bin")

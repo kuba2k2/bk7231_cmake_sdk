@@ -46,12 +46,11 @@ add_subdirectory(path/to/sdk/dir beken378)
 
 # Create example executables
 beken378_executable(hello_world 1.0.0 <platform> <sources>)
-
 ```
 
 with `<platform>` replaced with one of the supported SoCs, and <sources> with your C sources.
 
-To add include directories, libraries, etc., just call standard CMake functions with your app's name as target.
+To add include directories, libraries, etc., just call standard CMake functions with `hello_world.elf` as target.
 
 ## Outputs
 

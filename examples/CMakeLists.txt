@@ -10,3 +10,5 @@ add_subdirectory(.. beken378)
 
 # Create example executables
 beken378_executable(hello_world 1.0.0 bk7231t hello_world/main.c)
+beken378_executable(wifi_scan 1.0.0 bk7231t wifi_scan/wifi_scan.c)
+target_include_directories(wifi_scan.elf PUBLIC wifi_scan/)
