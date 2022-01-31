@@ -33,12 +33,20 @@ The firmware is encrypted using keys present in the source repo.
 
 ## Usage
 
-CMake should be called with `-DCMAKE_TOOLCHAIN_FILE=Toolchain.cmake` which points to this repo's Toolchain file.
-
-`add_subdirectory()` in your project's CMakeLists. Then call
-
 ```cmake
-beken378_executable(app_name 1.0.0 <platform> <sources>)
+cmake_minimum_required(VERSION 3.17)
+
+# Set toolchain file - otherwise CMake will complain
+set(CMAKE_TOOLCHAIN_FILE ../Toolchain.cmake)
+
+project(hello_world)
+
+# Include the SDK
+add_subdirectory(path/to/sdk/dir beken378)
+
+# Create example executables
+beken378_executable(hello_world 1.0.0 <platform> <sources>)
+
 ```
 
 with `<platform>` replaced with one of the supported SoCs, and <sources> with your C sources.

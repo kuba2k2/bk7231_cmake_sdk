@@ -56,7 +56,9 @@ endfunction()
 
 add_library(bk7231t_sdk STATIC ${SOURCES} ${SOURCES_RTOS} ${ASM})
 target_include_directories(bk7231t_sdk PUBLIC ${INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
-
-find_library(LIB_BLE NAMES libble.a PATHS "lib/")
-find_library(LIB_RWNX NAMES librwnx.a PATHS "lib/")
-target_link_libraries(bk7231t_sdk PUBLIC ${LIB_BLE} ${LIB_RWNX} ${CMAKE_CURRENT_BINARY_DIR}/libbk7231t_sdk.a)
+target_link_libraries(
+        bk7231t_sdk PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/libble.a
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/librwnx.a
+        ${CMAKE_CURRENT_BINARY_DIR}/libbk7231t_sdk.a
+)

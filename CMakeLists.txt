@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
 
+set(CMAKE_TOOLCHAIN_FILE Toolchain.cmake)
+
 project(beken378)
 
-set(CMAKE_TOOLCHAIN_FILE Toolchain.cmake)
 set(PLATFORMS ${CMAKE_CURRENT_SOURCE_DIR}/platform CACHE INTERNAL "")
 set(ENCRYPT ${CMAKE_CURRENT_SOURCE_DIR}/tools/encrypt CACHE INTERNAL "")
 set(BK_PACKAGER python ${CMAKE_CURRENT_SOURCE_DIR}/tools/beken_packager_wrapper CACHE INTERNAL "")
@@ -10,9 +11,8 @@ set(OTA_PACK_RT ${CMAKE_CURRENT_SOURCE_DIR}/tools/rt_ota_packaging_tool_cli CACH
 set(OTA_PACK_TY ${CMAKE_CURRENT_SOURCE_DIR}/tools/package CACHE INTERNAL "")
 
 function(beken378_executable TARGET VERSION PLATFORM SRCS)
-    add_subdirectory("${PLATFORMS}/${PLATFORM}")
+    add_subdirectory("${PLATFORMS}/${PLATFORM}" ${PLATFORM}_sdk)
 
-    set(OUT "${CMAKE_CURRENT_SOURCE_DIR}/build/${TARGET}/${VERSION}")
     set(FW "${TARGET}_${VERSION}")
     set(ELF "${FW}.elf")
     set(MAP "${FW}.map")
@@ -22,7 +22,7 @@ function(beken378_executable TARGET VERSION PLATFORM SRCS)
     set(BIN_UG "${FW}_UG.bin")
     set(BIN_QIO "${FW}_QIO.bin")
 
-    set(CMAKE_EXE_LINKER_FLAGS "-g -Wl,--gc-sections -marm -mcpu=arm968e-s -mthumb-interwork -nostdlib -Xlinker -Map=tuya.map -Wl,-wrap,malloc -Wl,-wrap,free -Wl,-wrap,zalloc -T${PLATFORMS}/${PLATFORM}.ld" PARENT_SCOPE)
+    set(CMAKE_EXE_LINKER_FLAGS "-g -Wl,--gc-sections -marm -mcpu=arm968e-s -mthumb-interwork -nostdlib -Xlinker -Map=beken.map -Wl,-wrap,malloc -Wl,-wrap,free -Wl,-wrap,zalloc -T${PLATFORMS}/${PLATFORM}.ld" PARENT_SCOPE)
     set_source_files_properties(${SRCS} PROPERTIES COMPILE_FLAGS "-g -mthumb -mcpu=arm968e-s -march=armv5te -mthumb-interwork -mlittle-endian -Os -std=c99 -ffunction-sections -Wall -fsigned-char -fdata-sections -Wunknown-pragmas -nostdlib -Wno-unused-function -Wno-unused-but-set-variable")
     add_executable(${ELF} ${SRCS})
     target_link_libraries(${ELF} PUBLIC ${PLATFORM}_sdk)
