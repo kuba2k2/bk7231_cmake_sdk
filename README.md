@@ -33,6 +33,8 @@ The firmware is encrypted using keys present in the source repo.
 
 ## Usage
 
+CMake should be called with `-DCMAKE_TOOLCHAIN_FILE=Toolchain.cmake` which points to this repo's Toolchain file.
+
 `add_subdirectory()` in your project's CMakeLists. Then call
 
 ```cmake
